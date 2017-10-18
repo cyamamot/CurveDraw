@@ -53,7 +53,6 @@
     <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>.\include;$(IncludePath)</IncludePath>
-    <LibraryPath>.\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -68,7 +67,7 @@
       <PrecompiledHeaderFile />
     </ClCompile>
     <Link>
-      <AdditionalDependencies>glew32.lib;glut32.lib;glu32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;C:\Users\Cody\Documents\repo\CurveDrawProject\CurveDraw(broken)\CurveDraw\Dependencies\glew\glew32.lib;C:\Users\Cody\Documents\repo\CurveDrawProject\CurveDraw(broken)\CurveDraw\Dependencies\glut\glut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
@@ -93,26 +92,27 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>glew32.lib;glut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;C:\Users\Cody\Documents\repo\CurveDrawProject\CurveDraw(broken)\CurveDraw\Dependencies\glew\glew32.lib;C:\Users\Cody\Documents\repo\CurveDrawProject\CurveDraw(broken)\CurveDraw\Dependencies\glut\glut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bezier.cpp" />
+    <ClCompile Include="BezierSubDiv.cpp" />
+    <ClCompile Include="BSpline.cpp" />
     <ClCompile Include="Curve.cpp" />
-    <ClCompile Include="curves2.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Point.cpp" />
-    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="ControlPoint.cpp" />
+    <ClCompile Include="UI.cpp" />
     <ClCompile Include="shaders.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bezier.h" />
-    <ClInclude Include="Bezier2.h" />
+    <ClInclude Include="BezierSubDiv.h" />
     <ClInclude Include="Bspline.h" />
     <ClInclude Include="Curve.h" />
-    <ClInclude Include="Point.h" />
-    <ClInclude Include="Scene.h" />
+    <ClInclude Include="ControlPoint.h" />
+    <ClInclude Include="UI.h" />
     <ClInclude Include="shaders.h" />
-    <ClInclude Include="WorkingScene.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

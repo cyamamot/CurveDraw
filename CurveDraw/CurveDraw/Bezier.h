@@ -1,15 +1,17 @@
+/*
+Class that defines Bezier curve, a subclass of the Curve class
+Given certain connected control points, create a smooth curve constrained by the control points using deCasteljau's algorithm
+*/
 #if !defined(BEZIER_H)
 #define BEZIER_H
 
 #include "Curve.h"
 
-// The Bezier class.  It just adds the draw method to Curve.  
-// This is a basic Bezier, can be implemented with deCasteljau.
-
 class Bezier : public Curve  
 {
 public:
-	void draw(int levelOfDetail);
+	//draws curve based on control points using deCasteljau algorithm for some LOD (level of detail)
+	void DrawCurve(int LOD);
 	Bezier() {};
 	virtual ~Bezier() {};
 

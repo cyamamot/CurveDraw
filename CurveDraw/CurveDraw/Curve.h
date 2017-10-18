@@ -1,51 +1,43 @@
+/*
+class that defines base Curve class
+contains it list of control points, its currently selected point, and color
+responsible for control point manipulation and base curve drawing functions
+*/
 #if !defined(CURVE_H)
 #define CURVE_H
 
 #include <vector>
 #include <math.h>
-#include "GL/glew.h"
-#include "GL/glut.h"
-#include "Point.h"
-
-// To account for C++ namespace issues
-typedef std::vector<Point> Pvector;
-
-// glLineWidth() doesn't work on OSX systems, so we will alternatively draw
-// thick lines using triangles in both the Windows and OSX + Linux versions
-// of this homework.
-
-// The basic curve class.  The basic element is a vector of Points, 
-// which is the Pvector.  
-// The class has methods for drawing adding, deleting, moving, updating, 
-// and so forth.  More details are in Curve.cpp 
-// The draw method is virtual since it is over-ridden by the specific 
-// curve (Bspline, Bezier, Bezier2 etc.).  
-
-// points is the actual vector of points used.  
-// The iterator into this (look up C++ iterators) is activePoint 
-// The bool isactive indicates if there is currently any active point 
-// (In previous versions, we did this by setting activePoint to null, but 
-// this is no longer allowed in modern C++)
-
+#include "../CurveDraw/Dependencies/glew/glew.h"
+#include "../CurveDraw/Dependencies/glut/glut.h"
+#include "ControlPoint.h"
 
 class Curve  
 {
 protected:
-	Pvector points;
-	Pvector::iterator activePoint;
-    bool isactive ;
+	std::vector<ControlPoint> points;
+	std::vector<ControlPoint>::iterator SelectedPoint;
+    bool HasPointSelected ;
 	GLuint colorPos;
+	const float LINE_WIDTH = 5.0f;
 	
 public:
 	Curve();
 	virtual ~Curve();
-	virtual void draw(int levelOfDetail);
-	void addPoint(float x, float y);
-	void deleteActivePoint();
-	void moveActivePoint(float dx, float dy);
-	void updateActivePoint(float x, float y);
-	void connectTheDots();
-    void drawLine(float x1, float y1, float x2, float y2) ;
+	//overridable curve DrawCurve function
+	virtual void DrawCurve(int LOD);
+	//add control point to list
+	void AddPoint(float x, float y);
+	//delete currently selected control point (control shape will adjust according to input order or remaining points)
+	void DeletePoint();
+	//moves currently selected control point
+	void MovePoint(float dx, float dy);
+	//updats which point is currently selected
+	void UpdatePoint(float x, float y);
+	//connects all control points
+	void ConnectControlPoints();
+	//base function used to connect points in curve approximation
+    void DrawCurveLine(float x1, float y1, float x2, float y2) ;
 	void setShaderReferences(GLuint);
 };
 

@@ -1,24 +1,14 @@
-/*************************************************************************/
-/***** The Skeleton Code for the Curves Assignment for CSE 167       *****/
-/***** Originally written by Aner Ben-Artzi several years ago        *****/
-/***** Modified in Dec 2009 by Ravi Ramamoorthi for more comments,   *****/
-/***** and consistency with modern C++ rules                         *****/
-/***** Modified in Dec 2011 by Ravi Ramamoorthi to be consistent     *****/
-/***** Modified in Aug 2016 by Hoang Tran to only use modern OpenGL  *****/
-/*************************************************************************/
-
 #include <iostream>
-#include <GL/glew.h>
-#include <GL/glut.h>
+#include "../CurveDraw/Dependencies/glew/glew.h"
+#include "../CurveDraw/Dependencies/glut/glut.h"
 #include "shaders.h"
-#include "WorkingScene.h"
+#include "UI.h"
 
-#define ASSIGNMENT_NAME "Homework: Curves"
-
-WorkingScene scene; // the scene information 
+UI ui; // the ui information 
 GLuint vertexshader, fragmentshader, shaderprogram ; // shaders
 GLuint VAO, VBO; // Needed for vertex data
 GLuint projectionPos, modelviewPos, colorPos; // Uniform variables
+std::string ASSIGNMENT_NAME = "CurveDraw";
 
 // Basic display and main setup routines.  
 // Display just does basic OpenGL stuff to display 2D curve
@@ -44,8 +34,8 @@ void display() {
 	//Second, the framebuffer is filled with the objects in the scene
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glBindVertexArray(VAO);
-	if (scene.theOnlyCurve) {
-		scene.theOnlyCurve->draw(scene.levelOfDetail);
+	if (ui.CurveOnScreen) {
+		ui.CurveOnScreen->DrawCurve(ui.LOD);
 	}
 	glBindVertexArray(0);
 	glutSwapBuffers();
@@ -54,9 +44,9 @@ void display() {
 // The initialization function for curves.
 void init() {
 	// Initialize the shaders
-    vertexshader = initshaders(GL_VERTEX_SHADER, "../CurveDraw/shaders/nop.vert.glsl") ;
-    fragmentshader = initshaders(GL_FRAGMENT_SHADER, "../CurveDraw/shaders/nop.frag.glsl") ;
-    shaderprogram = initprogram(vertexshader, fragmentshader) ; 
+    vertexshader = InitializeShaders(GL_VERTEX_SHADER, "../CurveDraw/shaders/nop.vert.glsl") ;
+    fragmentshader = InitializeShaders(GL_FRAGMENT_SHADER, "../CurveDraw/shaders/nop.frag.glsl") ;
+    shaderprogram = InitializeProgram(vertexshader, fragmentshader) ; 
 	// Get the locations of the uniform variables
 	projectionPos = glGetUniformLocation(shaderprogram, "projection");
 	modelviewPos = glGetUniformLocation(shaderprogram, "modelview");
@@ -74,14 +64,15 @@ void init() {
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), 0);
 	glBindVertexArray(0);
 	// Pass information to the scene (so it can be forwarded to the curves)
-	scene.colorPos = colorPos;
+	ui.colorPos = colorPos;
+	ui.PrintInstructions();
 }
 
 int main(int argc, char* argv[]) {
 	glutInit( &argc, argv );
-	glutInitWindowSize( scene.width, scene.height );
+	glutInitWindowSize( ui.width, ui.height );
 	glutInitDisplayMode( GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH );
-	glutCreateWindow( ASSIGNMENT_NAME );
+	glutCreateWindow( ASSIGNMENT_NAME.c_str() );
 
 	GLenum err = glewInit() ; 
 	if (GLEW_OK != err) { 
@@ -90,11 +81,11 @@ int main(int argc, char* argv[]) {
 
     init() ; 
 	glutDisplayFunc( display );
-	glutKeyboardFunc( scene.keyboard );
-	glutMouseFunc( scene.mouse );
-	glutReshapeFunc( scene.reshape );
-	glutPassiveMotionFunc( scene.passiveMotion );
-	glutMotionFunc( scene.drag );	
+	glutKeyboardFunc( ui.keyboard );
+	glutMouseFunc( ui.mouse );
+	glutReshapeFunc( ui.Resize );
+	glutPassiveMotionFunc( ui.passiveMotion );
+	glutMotionFunc( ui.drag );	
 	glutMainLoop();
 	// Program termination, destroy the VAO and VBO
 	glDeleteVertexArrays(1, &VAO);

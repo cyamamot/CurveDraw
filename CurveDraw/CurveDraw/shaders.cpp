@@ -2,18 +2,13 @@
 #include <fstream>
 #include <cstring>
 #include <string>
-#include <GL/glew.h>
-#include <GL/glut.h>
+#include "../CurveDraw/Dependencies/glew/glew.h"
+#include "../CurveDraw/Dependencies/glut/glut.h"
 
 using namespace std; 
 
-// This is a basic program to initiate a shader
-// The textFileRead function reads in a filename into a string
-// programerrors and shadererrors output compilation errors
-// initshaders initiates a vertex or fragment shader
-// initprogram initiates a program with vertex and fragment shaders
-
-string textFileRead (const char * filename) {
+string ReadTextFile (const char * filename) 
+{
 	string str,ret = ""; 
 	ifstream in; 
 	in.open(filename); 
@@ -32,7 +27,8 @@ string textFileRead (const char * filename) {
 	}
 }
 
-void programerrors (const GLint program) {
+void LogProgramError (const GLint program) 
+{
 	GLint length; 
 	GLchar * log; 
 	glGetProgramiv(program,GL_INFO_LOG_LENGTH,&length); 
@@ -41,7 +37,7 @@ void programerrors (const GLint program) {
 	cout << "Compile Error,Log Below\n" << log << "\n"; 
 	delete [] log; 
 }
-void shadererrors (const GLint shader) {
+void LogShaderError (const GLint shader) {
 	GLint length; 
 	GLchar * log; 
 	glGetShaderiv(shader,GL_INFO_LOG_LENGTH,&length); 
@@ -51,25 +47,25 @@ void shadererrors (const GLint shader) {
 	delete [] log; 
 }
 
-GLuint initshaders (GLenum type,const char *filename) 
+GLuint InitializeShaders (GLenum type,const char *filename) 
 {
 	// Using GLSL shaders,OpenGL book,page 679 
-
 	GLuint shader = glCreateShader(type); 
 	GLint compiled;
-	string str = textFileRead(filename);
+	string str = ReadTextFile(filename);
 	const GLchar * cstr = str.c_str();
 	glShaderSource(shader, 1, &cstr, NULL);
 	glCompileShader (shader); 
 	glGetShaderiv (shader,GL_COMPILE_STATUS,&compiled); 
-	if (!compiled) { 
-		shadererrors (shader); 
+	if (!compiled)
+	{ 
+		LogShaderError (shader); 
 		throw 3; 
 	}
 	return shader; 
 }
 
-GLuint initprogram (GLuint vertexshader,GLuint fragmentshader) 
+GLuint InitializeProgram (GLuint vertexshader,GLuint fragmentshader) 
 {
 	GLuint program = glCreateProgram(); 
 	GLint linked; 
@@ -77,9 +73,10 @@ GLuint initprogram (GLuint vertexshader,GLuint fragmentshader)
 	glAttachShader(program,fragmentshader); 
 	glLinkProgram(program); 
 	glGetProgramiv(program,GL_LINK_STATUS,&linked); 
-	if (linked) glUseProgram(program); 
-	else { 
-		programerrors(program); 
+	if (linked) glUseProgram(program);
+	else
+	{ 
+		LogProgramError(program); 
 		throw 4; 
 	}
 	return program; 
