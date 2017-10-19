@@ -67,7 +67,7 @@
       <PrecompiledHeaderFile />
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;C:\Users\Cody\Documents\repo\CurveDrawProject\CurveDraw(broken)\CurveDraw\Dependencies\glew\glew32.lib;C:\Users\Cody\Documents\repo\CurveDrawProject\CurveDraw(broken)\CurveDraw\Dependencies\glut\glut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;C:\Users\Cody\Documents\repo\CurveDrawProject\CurveDraw\CurveDraw\Dependencies\glew\glew32.lib;C:\Users\Cody\Documents\repo\CurveDrawProject\CurveDraw\CurveDraw\Dependencies\glut\glut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
@@ -92,7 +92,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
-      <AdditionalDependencies>opengl32.lib;C:\Users\Cody\Documents\repo\CurveDrawProject\CurveDraw(broken)\CurveDraw\Dependencies\glew\glew32.lib;C:\Users\Cody\Documents\repo\CurveDrawProject\CurveDraw(broken)\CurveDraw\Dependencies\glut\glut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;C:\Users\Cody\Documents\repo\CurveDrawProject\CurveDraw\CurveDraw\Dependencies\glew\glew32.lib;C:\Users\Cody\Documents\repo\CurveDrawProject\CurveDraw\CurveDraw\Dependencies\glut\glut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

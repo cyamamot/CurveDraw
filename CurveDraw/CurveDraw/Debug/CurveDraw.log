@@ -1,11 +1,3 @@
 ﻿  main.cpp
-  UI.cpp
-  Curve.cpp
-  BSpline.cpp
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  ControlPoint.cpp
-  BezierSubDiv.cpp
-  Bezier.cpp
-  CurveDraw.vcxproj -> C:\Users\Cody\Documents\repo\CurveDrawProject\CurveDraw(broken)\Debug\CurveDraw.exe
-  CurveDraw.vcxproj -> C:\Users\Cody\Documents\repo\CurveDrawProject\CurveDraw(broken)\Debug\CurveDraw.pdb (Full PDB)
+  CurveDraw.vcxproj -> C:\Users\Cody\Documents\repo\CurveDrawProject\CurveDraw\Debug\CurveDraw.exe
+  CurveDraw.vcxproj -> C:\Users\Cody\Documents\repo\CurveDrawProject\CurveDraw\Debug\CurveDraw.pdb (Full PDB)

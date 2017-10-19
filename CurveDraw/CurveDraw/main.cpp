@@ -44,8 +44,8 @@ void display() {
 // The initialization function for curves.
 void init() {
 	// Initialize the shaders
-    vertexshader = InitializeShaders(GL_VERTEX_SHADER, "../CurveDraw/shaders/nop.vert.glsl") ;
-    fragmentshader = InitializeShaders(GL_FRAGMENT_SHADER, "../CurveDraw/shaders/nop.frag.glsl") ;
+    vertexshader = InitializeShaders(GL_VERTEX_SHADER, "shaders/nop.vert.glsl") ;
+    fragmentshader = InitializeShaders(GL_FRAGMENT_SHADER, "shaders/nop.frag.glsl") ;
     shaderprogram = InitializeProgram(vertexshader, fragmentshader) ; 
 	// Get the locations of the uniform variables
 	projectionPos = glGetUniformLocation(shaderprogram, "projection");
